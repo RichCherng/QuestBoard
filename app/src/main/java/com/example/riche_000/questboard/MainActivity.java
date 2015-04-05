@@ -9,18 +9,43 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.parse.Parse;
+import com.parse.ParseUser;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        // Enable Local Datastore.
+        //Initializze Parse
         Parse.enableLocalDatastore(this);
-
         Parse.initialize(this, "8xbBV0VSPvp3IFabbFCeA4Q9REue38x6mCBo35mc", "N2YpkaQD2HFWwxFz953WB0JywWhGtmu12waHAh0n");
+
+        //Check for existing User
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if (currentUser == null) {
+            loadLoginView();
+        }
+
+
+
+    }
+
+    /**
+     * if there're no existing user then redirect to login
+     */
+    public void loadLoginView(){
+        Intent intent = new Intent(this, login.class);
+        //Clear stack history, loging become main
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+
+    public void goToComment(View view){
+        Intent i = new Intent(this, Rating.class);
+        startActivity(i);
     }
 
     public void QuestLog(View view){
@@ -51,6 +76,11 @@ public class MainActivity extends Activity {
         if (id == R.id.action_settings) {
             return true;
         }
+        else if(id == R.id.action_logout){
+            ParseUser.logOut();
+            loadLoginView();
+        }
+
 
         return super.onOptionsItemSelected(item);
     }

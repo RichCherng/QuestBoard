@@ -35,6 +35,18 @@
             android:name=".Expand"
             android:label="@string/title_activity_expand" >
         </activity>
+        <activity
+            android:name=".Rating"
+            android:label="@string/title_activity_rating" >
+        </activity>
+        <activity
+            android:name=".login"
+            android:label="@string/title_activity_login" >
+        </activity>
+        <activity
+            android:name=".sign_up"
+            android:label="@string/title_activity_sign_up" >
+        </activity>
     </application>
 
 </manifest>

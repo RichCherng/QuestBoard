@@ -34,9 +34,10 @@
                 android:layout_width="135dp"
                 android:layout_height="50dp"
                 android:id="@+id/titleText"
-                android:text="Title"
+                android:text="@string/Title"
                 android:gravity="center"
-                android:layout_margin="25dp"/>
+                android:layout_margin="25dp"
+                />
 
             <EditText
                 android:layout_width="141dp"
@@ -45,10 +46,9 @@
                 android:gravity="center"
                 android:layout_alignBaseline="@+id/takePic"
                 android:layout_alignBottom="@+id/takePic"
-                android:layout_toEndOf="@+id/takePic"
-                android:layout_toRightOf="@+id/takePic"
-                android:text="Description"
-                android:layout_margin="25dp" />
+                android:text="@string/des"
+                android:layout_margin="25dp"
+                />
 
             <EditText
                 android:layout_width="match_parent"
@@ -57,7 +57,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Time"
+                android:text="@string/Time"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/locationText"
                 android:layout_toEndOf="@+id/locationText" />
@@ -75,7 +75,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="Location"
+                    android:text="@string/location"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true" />
 
