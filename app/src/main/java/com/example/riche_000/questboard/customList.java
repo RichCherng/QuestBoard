@@ -1,6 +1,7 @@
 package com.example.riche_000.questboard;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
@@ -24,17 +25,22 @@ import java.util.List;
 
 public class customList extends ArrayAdapter<ParseObject> {
 
+
     List<ParseObject> res;
+    View customView;
+
     public customList(Context context,List<ParseObject> resource){//List<ParseObject> resource) {
         super(context,R.layout.feedquest, resource);
         res = resource;
+
+
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
         LayoutInflater inflater = LayoutInflater.from(getContext());
-        View customView = inflater.inflate(R.layout.feedquest, parent, false);
+        customView = inflater.inflate(R.layout.feedquest, parent, false);
 
         TextView feedView = (TextView) customView.findViewById(R.id.listText);
         final ImageView img = (ImageView) customView.findViewById(R.id.picView);

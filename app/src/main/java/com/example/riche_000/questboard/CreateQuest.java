@@ -28,7 +28,7 @@ public class CreateQuest extends ActionBarActivity {
     static final int REQUEST_IMAGE_CAPTURE = 1;
     ImageView imageView;
     Bitmap photo;
-    EditText title,description,location;
+    EditText title,description,location,time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +42,7 @@ public class CreateQuest extends ActionBarActivity {
         title = (EditText) findViewById(R.id.titleText);
         description = (EditText) findViewById(R.id.des);
         location = (EditText) findViewById(R.id.locationText);
+        time = (EditText) findViewById(R.id.timeText);
         //Disable button if user has no camera
         if(!hasCamera()){
             imgButton.setEnabled(false);
@@ -68,6 +69,8 @@ public class CreateQuest extends ActionBarActivity {
         quest.put("image",file);
         //add Title
         quest.put("title", title.getText().toString());
+        //add time
+        quest.put("time", time.getText().toString());
         //add description
         quest.put("description", description.getText().toString());
         //add Location

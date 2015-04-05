@@ -2,6 +2,8 @@ package com.example.riche_000.questboard;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,14 +11,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
+import com.parse.GetDataCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -32,7 +41,7 @@ public class QuestList extends ActionBarActivity {
 
         ParseQuery query = new ParseQuery("Quest");
         query.findInBackground(new FindCallback<ParseObject>() {
-            public void done(List<ParseObject> objects,
+            public void done(final List<ParseObject> objects,
                              ParseException e) {
                 if (e == null) {
                     Log.d("Brand", "Retrieved " + objects.size() + " Brands");
@@ -50,6 +59,36 @@ public class QuestList extends ActionBarActivity {
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                     String food = String.valueOf(parent.getItemAtPosition(position));
                                     //Toast.makeText(QuestList.this, food, Toast.LENGTH_SHORT).show();
+                                    TextView title,userID,time,date,timepost,location;
+                                    final ImageView img = (ImageView) findViewById(R.id.expand_img);
+                                    title = (TextView) findViewById(R.id.expand_title);
+                                    userID = (TextView) findViewById(R.id.expand_ID);
+                                    time = (TextView) findViewById(R.id.expand_time);
+                                    timepost = (TextView) findViewById(R.id.expand_time_posted);
+                                    location = (TextView) findViewById(R.id.expand_location);
+
+                                    title.setText(objects.get(position).getString("title"));
+                                    userID.setText(objects.get(position).getObjectId());
+                                    time.setText(objects.get(position).getString("time"));
+                                    timepost.setText(objects.get(position).getString("createdAt"));
+                                    location.setText(objects.get(position).getString("location"));
+
+                                    ParseFile fileObject = objects.get(position).getParseFile("image");
+                                    fileObject.getDataInBackground(new GetDataCallback() {
+                                        public void done(byte[] data, ParseException e) {
+                                            if (e == null) {
+                                                Log.d("test", "We've got data in data.");
+                                                // use data for something
+                                                byte[] bitpic = data;
+                                                Bitmap bitmap = BitmapFactory.decodeByteArray(bitpic, 0, bitpic.length);
+                                                img.setImageBitmap(bitmap);
+                                            } else {
+                                                Log.d("test", "There was a problem downloading the data.");
+                                            }
+                                        }
+                                    });
+
+
                                     Intent i = new Intent(context,Expand.class);
                                     startActivity(i);
                                 }
