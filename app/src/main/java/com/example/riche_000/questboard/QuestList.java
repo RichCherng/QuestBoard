@@ -27,6 +27,10 @@ import com.parse.ParseQuery;
 
 import org.w3c.dom.Text;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 
@@ -58,12 +62,35 @@ public class QuestList extends ActionBarActivity {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                     //String food = String.valueOf(parent.getItemAtPosition(position));
+                                    ParseFile fileObject = objects.get(position).getParseFile("image");
+                                    fileObject.getDataInBackground(new GetDataCallback() {
+                                        public void done(byte[] data, ParseException e) {
+                                            if (e == null) {
+                                                Log.d("test", "We've got data in data.");
+                                                // use data for something
+                                                byte[] bitpic = data;
+                                                Bitmap bitmap = BitmapFactory.decodeByteArray(bitpic , 0, bitpic.length);
+                                               try {
+                                                   BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream("byte.dat"));
+                                                   bos.write(bitpic);
+                                                   bos.flush();
+                                                   bos.close();
+                                               }catch (IOException l){
+                                                    l.printStackTrace();
+                                               }
+                                            } else {
+                                                Log.d("test", "There was a problem downloading the data.");
+                                            }
+                                        }
+                                    });
+
+
                                     Intent i = new Intent(context,Expand.class);
                                     ParseProxyObject obs = new ParseProxyObject(objects.get(position));
                                     i.putExtra("parseobs",obs);
                                     startActivity(i);
 
-                                    String food = String.valueOf(objects.get(position).getObjectId());
+                                    //String food = String.valueOf(objects.get(position).getObjectId());
                                     //Toast.makeText(QuestList.this, food, Toast.LENGTH_SHORT).show();
 
 
