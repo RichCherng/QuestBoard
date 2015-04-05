@@ -57,40 +57,17 @@ public class QuestList extends ActionBarActivity {
                             new AdapterView.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                    String food = String.valueOf(parent.getItemAtPosition(position));
-                                    //Toast.makeText(QuestList.this, food, Toast.LENGTH_SHORT).show();
-                                    TextView title,userID,time,date,timepost,location;
-                                    final ImageView img = (ImageView) findViewById(R.id.expand_img);
-                                    title = (TextView) findViewById(R.id.expand_title);
-                                    userID = (TextView) findViewById(R.id.expand_ID);
-                                    time = (TextView) findViewById(R.id.expand_time);
-                                    timepost = (TextView) findViewById(R.id.expand_time_posted);
-                                    location = (TextView) findViewById(R.id.expand_location);
-
-                                    title.setText(objects.get(position).getString("title"));
-                                    userID.setText(objects.get(position).getObjectId());
-                                    time.setText(objects.get(position).getString("time"));
-                                    timepost.setText(objects.get(position).getString("createdAt"));
-                                    location.setText(objects.get(position).getString("location"));
-
-                                    ParseFile fileObject = objects.get(position).getParseFile("image");
-                                    fileObject.getDataInBackground(new GetDataCallback() {
-                                        public void done(byte[] data, ParseException e) {
-                                            if (e == null) {
-                                                Log.d("test", "We've got data in data.");
-                                                // use data for something
-                                                byte[] bitpic = data;
-                                                Bitmap bitmap = BitmapFactory.decodeByteArray(bitpic, 0, bitpic.length);
-                                                img.setImageBitmap(bitmap);
-                                            } else {
-                                                Log.d("test", "There was a problem downloading the data.");
-                                            }
-                                        }
-                                    });
-
-
+                                    //String food = String.valueOf(parent.getItemAtPosition(position));
                                     Intent i = new Intent(context,Expand.class);
+                                    ParseProxyObject obs = new ParseProxyObject(objects.get(position));
+                                    i.putExtra("parseobs",obs);
                                     startActivity(i);
+
+                                    String food = String.valueOf(objects.get(position).getObjectId());
+                                    //Toast.makeText(QuestList.this, food, Toast.LENGTH_SHORT).show();
+
+
+
                                 }
                             }
                     );

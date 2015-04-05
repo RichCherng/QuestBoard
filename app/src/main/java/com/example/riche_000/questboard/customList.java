@@ -45,7 +45,7 @@ public class customList extends ArrayAdapter<ParseObject> {
         TextView feedView = (TextView) customView.findViewById(R.id.listText);
         final ImageView img = (ImageView) customView.findViewById(R.id.picView);
 
-        String singleDescription = (res.get(position)).getString("description");
+        String singleDescription = (res.get(position)).getString("title");
 
         ParseFile fileObject = res.get(position).getParseFile("image");
         fileObject.getDataInBackground(new GetDataCallback() {
