@@ -17,6 +17,7 @@ import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
+import com.parse.ParseUser;
 
 import org.w3c.dom.Text;
 
@@ -46,7 +47,7 @@ public class customList extends ArrayAdapter<ParseObject> {
         final ImageView img = (ImageView) customView.findViewById(R.id.picView);
 
         String singleDescription = (res.get(position)).getString("title");
-
+        String username = res.get(position).getString("createdBy");
         ParseFile fileObject = res.get(position).getParseFile("image");
         fileObject.getDataInBackground(new GetDataCallback() {
             public void done(byte[] data, ParseException e) {

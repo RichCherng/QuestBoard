@@ -24,6 +24,7 @@ import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import org.w3c.dom.Text;
 
@@ -31,6 +32,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -52,7 +54,18 @@ public class QuestList extends ActionBarActivity {
                    /* for (ParseObject dealsObject : objects) {
                         // use dealsObject.get('columnName') to access the properties of the Deals object.
                     }*/
-                    ListAdapter listAdapter = new customList(context,objects);
+                    //Filter the list
+                    ParseUser currentUser = ParseUser.getCurrentUser();
+                    List<ParseObject> filt = new ArrayList<ParseObject>();
+                    for(ParseObject o: objects){
+                        String username = o.getString("createdBy");
+                        if(!(currentUser.getUsername().equals(username)))
+                        {
+                            filt.add(o);
+                        }
+                    }
+
+                    ListAdapter listAdapter = new customList(context,filt);
 
                     ListView listView = (ListView) findViewById(R.id.questListView);
                     listView.setAdapter(listAdapter);

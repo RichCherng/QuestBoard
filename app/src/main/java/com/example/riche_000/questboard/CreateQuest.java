@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import com.parse.Parse;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
+import com.parse.ParseUser;
 
 import java.io.ByteArrayOutputStream;
 
@@ -59,12 +60,16 @@ public class CreateQuest extends ActionBarActivity {
         ParseObject quest = new ParseObject("Quest");
         //quest.put("image",imageView);
 
+        ParseUser currentUser = ParseUser.getCurrentUser();
+
         //create image file
         ByteArrayOutputStream stream=new ByteArrayOutputStream();
         photo.compress(Bitmap.CompressFormat.PNG, 90, stream);
         byte[] image = stream.toByteArray();
         //parsefile to store image
         ParseFile file = new ParseFile("resume.png", image);
+        //add the name of user who created it
+        quest.put("createdBy", currentUser.getUsername());
         //add file to the object
         quest.put("image",file);
         //add Title
