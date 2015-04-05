@@ -5,14 +5,14 @@
     android:weightSum="1">
 
     <ImageView
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="79dp"
+        android:layout_height="79dp"
         android:id="@+id/picView"
         android:src="@drawable/moon"
         android:layout_margin="5dp" />
 
     <TextView
-        android:layout_width="200dp"
+        android:layout_width="220dp"
         android:layout_height="55dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
@@ -20,5 +20,6 @@
         android:layout_margin="25dp"
         android:textStyle="normal"
         android:layout_weight="0.40"
-        android:gravity="center|center_vertical" />
+        android:gravity="center|center_vertical"
+        android:layout_marginRight="20dp" />
 </LinearLayout>

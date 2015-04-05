@@ -9,4 +9,5 @@
     <string name="title_activity_create_quest">CreateQuest</string>
     <string name="take_photo">Take Photo</string>
     <string name="post">Post</string>
+    <string name="title_activity_expand">Expand</string>
 </resources>

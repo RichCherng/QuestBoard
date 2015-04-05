@@ -36,8 +36,7 @@
                 android:id="@+id/titleText"
                 android:text="Title"
                 android:gravity="center"
-                android:layout_margin="25dp"
-                android:inputType="Title" />
+                android:layout_margin="25dp"/>
 
             <EditText
                 android:layout_width="141dp"

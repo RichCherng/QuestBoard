@@ -1,6 +1,7 @@
 package com.example.riche_000.questboard;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,15 +28,6 @@ public class QuestList extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quest_list);
 
-        String[] foods = {"Basketball at 9pm, 5 people minimum",
-                             "Breakfast at Granny, 4 people",
-                             "Party @ johnny, 20 MAX!!",
-                             "MeatBall",
-                             "potato"};
-
-      //  ListAdapter listAdapter = new ArrayAdapter<String>(this,
-               // android.R.layout.simple_list_item_1, foods);
-
         final Context context = this;
 
         ParseQuery query = new ParseQuery("Quest");
@@ -57,7 +49,9 @@ public class QuestList extends ActionBarActivity {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                     String food = String.valueOf(parent.getItemAtPosition(position));
-                                    Toast.makeText(QuestList.this, food, Toast.LENGTH_LONG).show();
+                                    //Toast.makeText(QuestList.this, food, Toast.LENGTH_SHORT).show();
+                                    Intent i = new Intent(context,Expand.class);
+                                    startActivity(i);
                                 }
                             }
                     );

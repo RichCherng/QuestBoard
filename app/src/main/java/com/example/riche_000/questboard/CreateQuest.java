@@ -28,7 +28,7 @@ public class CreateQuest extends ActionBarActivity {
     static final int REQUEST_IMAGE_CAPTURE = 1;
     ImageView imageView;
     Bitmap photo;
-    EditText des;
+    EditText title,description,location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +37,11 @@ public class CreateQuest extends ActionBarActivity {
 
 
         Button imgButton = (Button) findViewById(R.id.takePic);
+        //initialize component
         imageView = (ImageView) findViewById(R.id.imageView);
-        des = (EditText) findViewById(R.id.des);
-
+        title = (EditText) findViewById(R.id.titleText);
+        description = (EditText) findViewById(R.id.des);
+        location = (EditText) findViewById(R.id.locationText);
         //Disable button if user has no camera
         if(!hasCamera()){
             imgButton.setEnabled(false);
@@ -56,15 +58,20 @@ public class CreateQuest extends ActionBarActivity {
         ParseObject quest = new ParseObject("Quest");
         //quest.put("image",imageView);
 
-        //Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.imageView);
+        //create image file
         ByteArrayOutputStream stream=new ByteArrayOutputStream();
         photo.compress(Bitmap.CompressFormat.PNG, 90, stream);
         byte[] image = stream.toByteArray();
-
+        //parsefile to store image
         ParseFile file = new ParseFile("resume.png", image);
-
+        //add file to the object
         quest.put("image",file);
-        quest.put("description", des.getText().toString());
+        //add Title
+        quest.put("title", title.getText().toString());
+        //add description
+        quest.put("description", description.getText().toString());
+        //add Location
+        quest.put("location", location.getText().toString());
         quest.saveInBackground();
         finish();
     }
