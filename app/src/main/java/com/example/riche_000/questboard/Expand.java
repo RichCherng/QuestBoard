@@ -51,13 +51,13 @@ public class Expand extends ActionBarActivity {
 
 
         title.setText(obs.getString("title"));
-        //userID.setText(obs.getParseUser("objectId"));
+        userID.setText(obs.getString("createdBy"));
         time.setText(obs.getString("time"));
         timepost.setText(obs.getString("createdAt"));
         location.setText(obs.getString("location"));
        // byte[] bitpic ;//= MediaStore.Files.readAllBytes("byte.dat");
 
-        File file = new File("byte.dat");
+        /*File file = new File("byte.dat");
         int size = (int) file.length();
         byte[] bytes = new byte[size];
         try {
@@ -72,7 +72,7 @@ public class Expand extends ActionBarActivity {
             e.printStackTrace();
         }
         Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-        img.setImageBitmap(bitmap);
+        img.setImageBitmap(bitmap);*/
         /*ParseFile fileObject = obs.getParseFile("image");
         fileObject.getDataInBackground(new GetDataCallback() {
             public void done(byte[] data, ParseException e) {
